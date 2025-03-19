@@ -77,7 +77,15 @@ app.patch("/posts/:id" , (req , res)=>{
 
 app.get("/posts/:id/edit" , (req , res) => {
     let {id} = req.params;
-    let singlepost = posts.find((p) => id === p.id);
+    singlepost = posts.filter((p) => id !== p.id);
     res.render("edit.ejs",{singlepost});
+});
+app.delete("/posts/:id" , (req , res) =>{
+    let {id} = req.params;
+    posts = posts.filter((p) => id !== p.id);//this will filter all the id where id!==p.id
+
+    console.log(posts);
+    // res.send("delete sucessfully");
+    res.redirect("/posts");
 });
 
